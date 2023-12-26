@@ -62,7 +62,7 @@ for comp in my_links:
         else:
             away_scores.append('-')
     
-    df = df.concat(pd.DataFrame({'Home': home, 'HG': home_scores, 'AG': away_scores, 'Away': away, 'Date_Time':date_time}))
+    df = pd.concat([df,pd.DataFrame({'Home': home, 'HG': home_scores, 'AG': away_scores, 'Away': away, 'Date_Time':date_time})],ignore_index=True)
 
 live_games = df[df['Date_Time'].str.contains("'") | df['Date_Time'].str.contains("Half time")] # live games
 
