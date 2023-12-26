@@ -70,7 +70,7 @@ st.header('Check Live Football Scores')
 st.info('Check the latest scores of live games in English leagues')
 
 if len(live_games.Home)>0:
-    live_teams = live_games.Home.append(live_games.Away)
+    live_teams = pd.concat([live_games.Home,live_games.Away])
 
     team = st.multiselect('Choose teams to display',live_teams)
 
