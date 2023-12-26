@@ -79,7 +79,7 @@ if len(live_games.Home)>0:
     else:
         team_select = live_games
 
-    st.markdown(team_select.style.hide_index().to_html(), unsafe_allow_html=True)
+    st.markdown(team_select.style.hide(axis='index').to_html(), unsafe_allow_html=True)
 
     st.write('')
     st.button('Refresh')
