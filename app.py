@@ -23,28 +23,28 @@ for comp in my_links:
     date_time = []
     
     for i in range(len(dateTime)):
-        date_time.append(dateTime[i].text.strip())
+        date_time = pd.concat([date_time,dateTime[i].text.strip()])
     
     #  searching for the teams
     team = page.find_all('span',  class_='SimpleMatchCardTeam_simpleMatchCardTeam__name__7Ud8D')
     teams = []
     for i in range(len(team)):
-        teams.append(team[i].text.strip())
+        teams = pd.concat([teams,team[i].text.strip()])
     
     # separating the teams
     home = []
     for i in teams[0::2]:
-        home.append(i)
+        home = pd.concat([home,i])
 
     away = []
     for i in teams[1::2]:
-        away.append(i)
+        away = pd.concat([away,i])
     
     # searching for the scores data
     score = page.find_all('span', class_='SimpleMatchCardTeam_simpleMatchCardTeam__score__UYMc_')
     scores = []
     for i in range(len(score)):
-        scores.append(score[i].text.split())
+        scores = pd.concat([scores,score[i].text.split()])
         
     # separating the scores
     home_scores = []
@@ -52,15 +52,15 @@ for comp in my_links:
 
     for i in scores[0::2]:
         if len(i)>0:
-            home_scores.append(i[0])
+            home_scores = pd.concat([home_scores,i[0]])
         else:
-            home_scores.append('-')
+            home_scores = pd.concat([home_scores,'-'])
 
     for i in scores[1::2]:
         if len(i)>0:
-            away_scores.append(i[0])
+            away_scores = pd.concat([away_scores,i[0]])
         else:
-            away_scores.append('-')
+            away_scores = pd.concat([away_scores,'-'])
     
     df = pd.concat([df,pd.DataFrame({'Home': home, 'HG': home_scores, 'AG': away_scores, 'Away': away, 'Date_Time':date_time})],ignore_index=True)
 
